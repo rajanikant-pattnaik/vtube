@@ -6,6 +6,7 @@ import React from "react";
 
 const Card = ({ title, imageUrl, videoId }: any) => {
  
+ 
   return (
     <>
       <Link href={`/search/${videoId}`}>
