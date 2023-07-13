@@ -13,9 +13,7 @@ export const fetchSearchData = async (item='latest') => {
     }
   };
   try {
-    console.log(item);
     const response = await axios.get(url,options);
-    console.log(response);
     const res=response.data;
     return res;
   } catch (error) {

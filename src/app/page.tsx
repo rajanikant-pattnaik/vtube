@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { fetchSearchData } from "@/helpers/fetchAPI";
 import Navbar from "./components/Navbar";
-import Image from "next/image";
+import Card from "./components/Card";
 
 export default function Home() {
   const [data, setdata] = useState([]);
@@ -11,7 +11,6 @@ export default function Home() {
     const fetchData = async () => {
       try {
         const result = await fetchSearchData();
-        console.log(result.items);
         setdata(result.items);
       } catch (error) {
         console.log(error);
@@ -28,11 +27,10 @@ export default function Home() {
             <div className="flex flex-wrap">
               {data.map((d: any) => (
                 <div key={d.id.videoId} className="m-2">
-                  <Image
-                    src={d.snippet.thumbnails.default.url}
-                    width={120}
-                    height={90}
-                    alt="d"
+                  <Card
+                    title={d.snippet.title}
+                    imageUrl={d.snippet.thumbnails.medium.url}
+                    videoId={d.id.videoId}
                   />
                 </div>
               ))}

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React, { useState } from "react";
 
 const Navbar = () => {
@@ -8,9 +9,7 @@ const Navbar = () => {
       <input type="text" className="text-black" name="item" onChange={(e)=>{
         setitem(e.target.value);
       }}/>
-      <button onClick={()=>{
-        console.log(item);
-      }}>search</button>
+      <button><Link href={`/searchItem/${item}`} className="text-white" >search</Link></button>
     </div>
   );
 };

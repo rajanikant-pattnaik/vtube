@@ -1,16 +1,15 @@
-"use client"
-import Navbar from '@/app/components/Navbar';
-import { fetchSearchData } from '@/helpers/fetchAPI';
-import Image from 'next/image';
-import React, { useEffect, useState } from 'react'
+"use client";
+import Card from "@/app/components/Card";
+import Navbar from "@/app/components/Navbar";
+import { fetchSearchData } from "@/helpers/fetchAPI";
+import React, { useEffect, useState } from "react";
 
-const SearchItems = ({params}:any) => {
-    const [data, setdata] = useState([]);
+const SearchItems = ({ params }: any) => {
+  const [data, setdata] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       try {
         const result = await fetchSearchData(params.item);
-        console.log(result.items);
         setdata(result.items);
       } catch (error) {
         console.log(error);
@@ -27,11 +26,10 @@ const SearchItems = ({params}:any) => {
             <div className="flex flex-wrap">
               {data.map((d: any) => (
                 <div key={d.id.videoId} className="m-2">
-                  <Image
-                    src={d.snippet.thumbnails.default.url}
-                    width={120}
-                    height={90}
-                    alt="d"
+                  <Card
+                    title={d.snippet.title}
+                    imageUrl={d.snippet.thumbnails.medium.url}
+                    videoId={d.id.videoId}
                   />
                 </div>
               ))}
@@ -42,7 +40,7 @@ const SearchItems = ({params}:any) => {
         <div>No Result</div>
       )}
     </main>
-  )
-}
+  );
+};
 
-export default SearchItems
+export default SearchItems;
