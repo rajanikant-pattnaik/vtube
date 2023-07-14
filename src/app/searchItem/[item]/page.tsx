@@ -3,9 +3,11 @@ import Card from "@/app/components/Card";
 import Navbar from "@/app/components/Navbar";
 import { fetchSearchData } from "@/helpers/fetchAPI";
 import React, { useEffect, useState } from "react";
+import { ColorRing } from "react-loader-spinner";
 
 const SearchItems = ({ params }: any) => {
   const [data, setdata] = useState([]);
+  const [loader, setloader] = useState(true)
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -13,6 +15,9 @@ const SearchItems = ({ params }: any) => {
         setdata(result.items);
       } catch (error) {
         console.log(error);
+      }
+      finally{
+        setloader(false);
       }
     };
     fetchData();
@@ -37,7 +42,24 @@ const SearchItems = ({ params }: any) => {
           }
         </div>
       ) : (
-        <div>No Result</div>
+        <div className="h-full w-full flex justify-center items-center">
+          {loader ? (
+            <div>
+             <h1>Latest results of term {params.item}</h1>
+            <ColorRing
+              visible={true}
+              height="80"
+              width="80"
+              ariaLabel="blocks-loading"
+              wrapperStyle={{}}
+              wrapperClass="blocks-wrapper"
+              colors={["#e15b64", "#f47e60", "#f8b26a", "#abbd81", "#849b87"]}
+            />
+           </div>
+          ) : (
+            "No Result"
+          )}
+        </div>
       )}
     </main>
   );

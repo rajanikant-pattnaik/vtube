@@ -5,7 +5,7 @@ const Navbar = () => {
   const [item, setitem] = useState("");
   return (
     <div className="w-full flex justify-between p-6 h-20 ">
-      VTUBE
+      <Link href={`/`} className="pointer">VTUBE</Link>
       <div className="w-1/2 h-full border-2 border-white px-2" >
         <input
           type="text"
