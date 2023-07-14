@@ -23,7 +23,7 @@ const SearchItems = ({ params }: any) => {
       {data?.length > 0 ? (
         <div>
           {
-            <div className="flex flex-wrap">
+            <div className="flex flex-wrap justify-center no-scrollbar">
               {data.map((d: any) => (
                 <div key={d.id.videoId} className="m-2">
                   <Card
