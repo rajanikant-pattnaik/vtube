@@ -1,6 +1,5 @@
 export const categories = [
-  "New",
-  "Web Developement",
+  "Latest",
   "Coding",
   "ReactJS",
   "NextJS",
@@ -11,7 +10,7 @@ export const categories = [
   "Gaming",
   "Live",
   "Sport",
-  "Fashio",
+  "Fashion",
   "Beauty",
   "Comedy",
   "Gym",

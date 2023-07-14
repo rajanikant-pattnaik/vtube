@@ -8,21 +8,22 @@ import FeedBar from "./components/FeedBar";
 
 export default function Home() {
   const [data, setdata] = useState([]);
+  const [feed, setfeed] = useState('Latest')
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result = await fetchSearchData();
+        const result = await fetchSearchData(feed);
         setdata(result.items);
       } catch (error) {
         console.log(error);
       }
     };
     fetchData();
-  }, []);
+  }, [feed]);
   return (
     <main>
       <Navbar />
-      <FeedBar/>
+      <FeedBar feed={feed} setfeed={setfeed}/>
       {data?.length > 0 ? (
         <div>
           {
