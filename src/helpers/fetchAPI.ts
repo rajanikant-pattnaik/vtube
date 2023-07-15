@@ -43,3 +43,28 @@ export const fetchVideoDetail=async(id:any)=>{
     console.error(error);
   }
 }
+
+export const channelDetails=async(id:any)=>{
+  const axios = require('axios')
+
+  const options = {
+    method: 'GET',
+    url: 'https://youtube-v31.p.rapidapi.com/channels',
+    params: {
+      part: 'snippet,statistics',
+      id: id
+    },
+    headers: {
+      'X-RapidAPI-Key': '96dc3bc4c7msh5a2e8330accf78ap1d0c9djsna783b8ed5f34',
+      'X-RapidAPI-Host': 'youtube-v31.p.rapidapi.com'
+    }
+  };
+  
+  try {
+    const response = await axios.request(options);
+    const data=response.data;
+    return data.items;
+  } catch (error) {
+    console.error(error);
+  }
+}
