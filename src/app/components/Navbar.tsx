@@ -4,7 +4,7 @@ import React, { useState } from "react";
 const Navbar = () => {
   const [item, setitem] = useState("");
   return (
-    <div className="w-full flex justify-between p-6 h-20 ">
+    <nav className="w-full flex sticky top-0 justify-between p-6 h-20 bg-black">
       <Link href={`/`} className="pointer">VTUBE</Link>
       <div className="w-1/2 h-full border-2 border-white px-2" >
         <input
@@ -22,7 +22,7 @@ const Navbar = () => {
         </button>
       </div>
       ACCOUNT
-    </div>
+    </nav>
   );
 };
 

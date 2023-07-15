@@ -5,7 +5,7 @@ export const fetchSearchData = async (item='latest') => {
   const options = {
     method: 'GET',
     params: {
-      maxResults: '50',
+      maxResults: '100',
     },
     headers: {
       'X-RapidAPI-Key': '96dc3bc4c7msh5a2e8330accf78ap1d0c9djsna783b8ed5f34',
@@ -37,7 +37,8 @@ export const fetchVideoDetail=async(id:any)=>{
   
   try {
     const response = await axios.get(url,options);
-    console.log(response.data);
+    console.log(response.data.items);
+    return response.data.items[0];
   } catch (error) {
     console.error(error);
   }
