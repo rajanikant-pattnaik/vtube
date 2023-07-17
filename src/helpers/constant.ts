@@ -16,3 +16,9 @@ export const categories = [
   "Gym",
   "Crypto",
 ];
+
+export const channelFeed=[
+  "Videos",
+  "Playlist",
+  "About"
+]

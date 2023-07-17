@@ -68,3 +68,28 @@ export const channelDetails=async(id:any)=>{
     console.error(error);
   }
 }
+export const fetchByIdData=async(id:any)=>{
+  const options = {
+    method: 'GET',
+    url: 'https://youtube-v31.p.rapidapi.com/search',
+    params: {
+      channelId: id,
+      part: 'snippet,id',
+      order: 'date',
+      maxResults: '50'
+    },
+    headers: {
+      'X-RapidAPI-Key': '96dc3bc4c7msh5a2e8330accf78ap1d0c9djsna783b8ed5f34',
+      'X-RapidAPI-Host': 'youtube-v31.p.rapidapi.com'
+    }
+  };
+  
+  try {
+    const response = await axios.request(options);
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+  
+}
