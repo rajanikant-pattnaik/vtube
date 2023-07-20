@@ -19,6 +19,5 @@ export const categories = [
 
 export const channelFeed=[
   "Videos",
-  "Playlist",
   "About"
 ]

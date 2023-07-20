@@ -37,7 +37,6 @@ export const fetchVideoDetail=async(id:any)=>{
   
   try {
     const response = await axios.get(url,options);
-    console.log(response.data.items);
     return response.data.items[0];
   } catch (error) {
     console.error(error);
@@ -86,10 +85,15 @@ export const fetchByIdData=async(id:any)=>{
   
   try {
     const response = await axios.request(options);
-    console.log(response.data);
     return response.data;
   } catch (error) {
     console.error(error);
   }
   
 }
+
+
+
+
+
+

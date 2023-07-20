@@ -1,4 +1,5 @@
 "use client";
+import ChannelAbout from "@/app/components/ChannelAbout";
 import ChannelFeed from "@/app/components/ChannelFeed";
 import ChannelVideo from "@/app/components/ChannelVideos";
 import Navbar from "@/app/components/Navbar";
@@ -12,7 +13,7 @@ const Page = ({ params }: any) => {
   useEffect(() => {
     const funcDetail = async () => {
       const res = await channelDetails(params.channelId);
-      console.log(res);
+      console.log(res)
       setdata(res);
     };
 
@@ -30,7 +31,7 @@ const Page = ({ params }: any) => {
           {data.map((d: any) => (
             <div key={d.id} className="w-full" style={{height:"80vh"}}>
               <Image
-                src={d.brandingSettings.image.bannerExternalUrl}
+                src={d.brandingSettings.image.bannerExternalUrl!}
                 width={500}
                 height={500}
                 className="w-full h-2/5"
