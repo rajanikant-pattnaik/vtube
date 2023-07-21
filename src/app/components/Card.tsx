@@ -10,9 +10,9 @@ const Card = ({ title, imageUrl, videoId }: any) => {
   return (
     <>
       <Link href={`/search/${videoId}`}>
-      <div className="w-80 h-64">
-        <Image src={imageUrl} width={320} height={180} alt="image of video" />
-        <h1>{title}</h1>
+      <div className="w-96 h-72 m-4 flex flex-col justify-center">
+        <Image src={imageUrl} width={360} height={240} alt="image of video" className=" rounded-2xl "/>
+        <h1 className="m-2">{title}</h1>
       </div>
       </Link>
     </>

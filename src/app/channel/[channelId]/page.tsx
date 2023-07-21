@@ -9,11 +9,11 @@ import React, { useEffect, useState } from "react";
 
 const Page = ({ params }: any) => {
   const [data, setdata] = useState([]);
-  const [feed, setfeed] = useState('Videos')
+  const [feed, setfeed] = useState("Videos");
   useEffect(() => {
     const funcDetail = async () => {
       const res = await channelDetails(params.channelId);
-      console.log(res)
+      console.log(res);
       setdata(res);
     };
 
@@ -29,7 +29,7 @@ const Page = ({ params }: any) => {
       ) : (
         <div>
           {data.map((d: any) => (
-            <div key={d.id} className="w-full" style={{height:"80vh"}}>
+            <div key={d.id} className="w-full" style={{ height: "80vh" }}>
               <Image
                 src={d.brandingSettings.image.bannerExternalUrl!}
                 width={500}
@@ -47,7 +47,18 @@ const Page = ({ params }: any) => {
             </div>
           ))}
           <ChannelFeed feed={feed} setfeed={setfeed} />
-          <ChannelVideo feed={params.channelId} />
+          {
+            {
+              Videos: <ChannelVideo feed={params.channelId} />,
+              About: (
+                <div>
+                  {data.map((d: any) => (
+                    <ChannelAbout key={d.id} Channel={d.brandingSettings.channel} />
+                  ))}
+                </div>
+              ),
+            }[feed]
+          }
         </div>
       )}
     </>
