@@ -23,4 +23,5 @@ const wlSchema=new mongoose.Schema({
     }
 })
 
-export const wl=mongoose.model("wl",wlSchema);
+ const wl= mongoose.models.wls|| mongoose.model("wls",wlSchema);
+ export default wl

@@ -23,4 +23,5 @@ const historySchema=new mongoose.Schema({
     }
 })
 
-export const history=mongoose.model("history",historySchema);
+ const history=mongoose.models.histories || mongoose.model("histories",historySchema);
+ export default history

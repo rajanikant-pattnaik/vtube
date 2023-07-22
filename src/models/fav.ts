@@ -23,4 +23,5 @@ const favSchema=new mongoose.Schema({
     }
 })
 
-export const fav=mongoose.model("fav",favSchema);
+ const fav= mongoose.models.favs|| mongoose.model("favs",favSchema);
+ export default fav

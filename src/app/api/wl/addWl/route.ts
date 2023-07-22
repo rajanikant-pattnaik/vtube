@@ -1,14 +1,14 @@
 import connectDb from "@/dbconfig/dbconfig";
 import { NextRequest,NextResponse } from "next/server";
-import history from "@/models/history";
+import wl from "@/models/watch-later";
 connectDb();
 export async function POST(request:NextRequest){
     try {
         const reqBody=await request.json();
         const {userId,vId,title,image}=reqBody;
-        const historyData=await history.findOne({userId,vId});
-        if(!historyData){
-            const newData=new history({
+        const wlData=await wl.findOne({userId,vId});
+        if(!wlData){
+            const newData=new wl({
                 userId,
                 vId,
                 title,
@@ -17,15 +17,14 @@ export async function POST(request:NextRequest){
             })
             const savedData=await newData.save();
             return NextResponse.json({
-                message:"success! history is added",
+                message:"success! wl is added",
                 savedData
             })
         }
-        historyData.createdAt=Date.now();
-        await historyData.save();
+        await wlData.deleteOne();
         return NextResponse.json({
-            message:"success! history is updated",
-            historyData
+            message:"success! wl is deleted",
+            wlData
         })
     } catch (err:any) {
         return NextResponse.json({
