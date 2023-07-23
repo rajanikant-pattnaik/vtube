@@ -1,13 +1,32 @@
 "use client";
 
+import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const Card = ({ title, imageUrl, videoId }: any) => {
-  const addHistory=()=>{
-    console.log("history will be added")
+  const [userId, setuserId] = useState('')
+  const addHistory=async()=>{
+    try {
+      if(userId!==''){
+        const res=await axios.post('/api/history/addHistory',{userId,vId:videoId,title,image:imageUrl})
+        console.log(res.data);
+        console.log("history will be added")
+      }
+    } catch (error:any) {
+      console.log(error.message)
+    }
   }
+
+  useEffect(() => {
+    const val=localStorage.getItem('user')
+    if(val!==null){
+      const userval=JSON.parse(val);
+      setuserId(userval.user._id)
+    }
+  
+  }, [])
  
   return (
     <>

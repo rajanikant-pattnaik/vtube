@@ -2,6 +2,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import toast, { Toaster } from 'react-hot-toast'
 
 const Page = () => {
   const [auth, setauth] = useState("Login");
@@ -17,23 +18,22 @@ const Page = () => {
       [e.target.name]: e.target.value,
     });
   };
+  
   const handleAuth = async () => {
     if (auth === "Login") {
       try {
-        console.log(cred);
         const res=await axios.post('/api/users/login',cred);
-        console.log(res.data)
         localStorage.setItem('user',JSON.stringify(res.data))
         router.push('/')
+        toast.success('User login Successfully')
       } catch (error:any) {
-        console.log(error.message)
+        toast.error(error.message);
       }
       
     }
     if (auth === "Register") {
       try {
         const regCred = { username, ...cred };
-        console.log(regCred);
         const res = await axios.post("/api/users/signup", regCred);
         setauth("Login");
         setUsername("");
@@ -41,9 +41,9 @@ const Page = () => {
           email: "",
           password: "",
         });
-        console.log(res);
-      } catch (error) {
-        console.log(error);
+        toast.success('user registered successfully')
+      } catch (error:any) {
+        toast.error(error.message);
       }
     }
   };
@@ -223,6 +223,7 @@ const Page = () => {
                               : "Login into your account"
                           }`}
                         </button>
+                        <Toaster/>
                       </p>
                     </div>
                   </div>
