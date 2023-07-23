@@ -18,6 +18,7 @@ export async function POST(request:NextRequest){
                 error:"Password is incorrect"
             },{status:401})
         }
+        user.password='';
         return NextResponse.json({
             message:"User successfully login",
             user

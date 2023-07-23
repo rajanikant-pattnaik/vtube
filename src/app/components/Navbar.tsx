@@ -1,8 +1,18 @@
+"use client";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const Navbar = () => {
   const [item, setitem] = useState("");
+  const [acc,setAcc]=useState('ACCOUNT')
+  useEffect(() => {
+    const val=localStorage.getItem('user')
+    if(val!==null){
+      const userval=JSON.parse(val)
+      console.log(userval)
+      setAcc(userval.user.username)
+    }
+  }, [])
   return (
     <nav className="w-full flex sticky top-0 justify-between p-6 h-20 bg-black">
       <Link href={`/`} className="pointer">VTUBE</Link>
@@ -21,7 +31,7 @@ const Navbar = () => {
           </Link>
         </button>
       </div>
-      ACCOUNT
+      {acc}
     </nav>
   );
 };
