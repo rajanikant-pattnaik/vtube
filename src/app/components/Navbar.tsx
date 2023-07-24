@@ -1,13 +1,15 @@
 "use client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import toast, { Toaster } from 'react-hot-toast'
+import UserContext from "@/context/UserContext";
 
 const Navbar = () => {
   const [item, setitem] = useState("");
   const [acc, setAcc] = useState("ACCOUNT");
   const router=useRouter();
+  const {username}=useContext(UserContext);
   const handleLogout=()=>{
     if(acc!=='ACCOUNT'){
       localStorage.removeItem('user');
@@ -19,13 +21,10 @@ const Navbar = () => {
     }
   }
   useEffect(() => {
-    const val = localStorage.getItem("user");
-    if (val !== null) {
-      const userval = JSON.parse(val);
-      console.log(userval);
-      setAcc(userval.user.username);
+    if(username!==''){
+      setAcc(username)
     }
-  }, []);
+  }, [username]);
   return (
     <nav className="w-full flex sticky top-0 justify-between p-6 h-20 bg-black">
       <Link href={`/`} className="pointer">

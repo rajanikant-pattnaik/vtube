@@ -28,6 +28,7 @@ const Page = () => {
         toast.success('User login Successfully')
       } catch (error:any) {
         toast.error(error.message);
+        console.log(error)
       }
       
     }
