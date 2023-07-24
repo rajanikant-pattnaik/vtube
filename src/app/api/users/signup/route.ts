@@ -1,6 +1,7 @@
 import connectDb from "@/dbconfig/dbconfig";
 import { NextRequest,NextResponse } from "next/server";
 import User from "@/models/user";
+import bcrypt from 'bcrypt'
 connectDb();
 export async function POST(request:NextRequest){
     try {
@@ -11,10 +12,12 @@ export async function POST(request:NextRequest){
         if(user){
             return NextResponse.json({error:"User already exist"},{status:400})
         }
+        const salt=await bcrypt.genSalt(10);
+        const hashedPassword=await bcrypt.hash(password,salt)
         const newUser=new User({
             username,
             email,
-            password,
+            password:hashedPassword,
             createdAt:Date.now()
         })
         const savedUser=await newUser.save()

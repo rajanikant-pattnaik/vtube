@@ -1,6 +1,8 @@
 import connectDb from "@/dbconfig/dbconfig";
 import { NextRequest,NextResponse } from "next/server";
 import User from "@/models/user";
+import bcrypt from 'bcrypt'
+import jwt from "jsonwebtoken"
 connectDb();
 export async function POST(request:NextRequest){
     try {
@@ -13,16 +15,27 @@ export async function POST(request:NextRequest){
                 error:"user dosent exist"
             },{status:400})
         }
-        if(user.password!==password){
+        const isValidPassword=await bcrypt.compare(password,user.password)
+        if(!isValidPassword){
             return NextResponse.json({
                 error:"Password is incorrect"
             },{status:401})
         }
-        user.password='';
-        return NextResponse.json({
-            message:"User successfully login",
-            user
+        const tokenData={
+            id:user._id,
+            username:user.username,
+            email:user.email
+        }
+        //create Token
+        const token=await jwt.sign(tokenData,process.env.TOKEN_SECRET!,{expiresIn:'1d'})
+        const response=NextResponse.json({
+            message:"Login Successfully",
+            success:true
         })
+        response.cookies.set('token',token,{
+            httpOnly:true,
+        })
+        return response;
         
     } catch (err:any) {
         console.log(err)
