@@ -24,7 +24,6 @@ export default function RootLayout({
     const val = localStorage.getItem("user");
     if (val !== null) {
       const userval = JSON.parse(val);
-      console.log(userval);
       setusername(userval.tokenData.username);
       setid(userval.tokenData.id);
     }

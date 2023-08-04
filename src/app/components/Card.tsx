@@ -1,12 +1,14 @@
 "use client";
 
+import UserContext from "@/context/UserContext";
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 const Card = ({ title, imageUrl, videoId }: any) => {
   const [userId, setuserId] = useState("");
+  const {id}=useContext(UserContext);
   const addHistory = async () => {
     try {
       if (userId !== "") {
@@ -25,13 +27,10 @@ const Card = ({ title, imageUrl, videoId }: any) => {
   };
 
   useEffect(() => {
-    const val = localStorage.getItem("user");
-    if (val !== null) {
-      const userval = JSON.parse(val);
-      // console.log(userval.tokenData.id);
-      setuserId(userval.tokenData.id);
-    }
-  }, []);
+   if(id!==''){
+     setuserId(id);
+   }
+  }, [id]);
 
   return (
     <>
