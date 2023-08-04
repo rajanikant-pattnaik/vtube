@@ -32,7 +32,7 @@ const Video = ({ feed }: any) => {
               </h1>
               <div className="flex flex-wrap justify-center no-scrollbar">
                 {data.map((d: any) => (
-                  <div key={d.id.videoId} className=" flex justify-center cursor-pointer m-4 border-r-2 border-white">
+                  <div key={d.id.videoId}>
                     <Card
                       title={d.snippet.title}
                       imageUrl={d.snippet.thumbnails.medium.url}

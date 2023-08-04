@@ -17,20 +17,24 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const [id, setid] = useState('')
-  const [username, setusername] = useState('')
-  const [email, setemail] = useState('')
+  const [id, setid] = useState("");
+  const [username, setusername] = useState("");
+  const [email, setemail] = useState("");
   useEffect(() => {
     const val = localStorage.getItem("user");
     if (val !== null) {
       const userval = JSON.parse(val);
-      setusername(userval.user.username);
+      console.log(userval);
+      setusername(userval.tokenData.username);
+      setid(userval.tokenData.id);
     }
   }, []);
   return (
     <html lang="en">
       <body className={inter.className}>
-        <UserContextProvider value={{id,setid,username,setusername,email,setemail}}>
+        <UserContextProvider
+          value={{ id, setid, username, setusername, email, setemail }}
+        >
           {children}
         </UserContextProvider>
       </body>

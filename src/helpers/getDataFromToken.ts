@@ -1,6 +1,5 @@
 import { NextRequest } from "next/server";
 import jwt from "jsonwebtoken";
-import { verify } from "crypto";
 
 export const getDataFromToken=(request:NextRequest)=>{
     try {
@@ -8,6 +7,7 @@ export const getDataFromToken=(request:NextRequest)=>{
         const decodedToken:any=jwt.verify(token,process.env.TOKEN_SECRET!);
         return decodedToken.id;
     } catch (error:any) {
+        console.log(error)
        throw new Error(error.message);
     }
 }
