@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import React, { useContext, useEffect, useState } from 'react'
 import Card from '../components/Card';
+import Navbar from '../components/Navbar';
 
 const Page = () => {
   const router=useRouter();
@@ -27,6 +28,7 @@ const Page = () => {
   }, [id])
   return (
     <div>
+      <Navbar/>
       {data?.length > 0 ? (
         <div>
           {
