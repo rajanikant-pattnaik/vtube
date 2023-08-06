@@ -5,10 +5,11 @@ import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useContext, useEffect, useState } from "react";
+import { AiFillLike } from "react-icons/ai";
 
 const Card = ({ title, imageUrl, videoId }: any) => {
   const [userId, setuserId] = useState("");
-  const {id}=useContext(UserContext);
+  const { id } = useContext(UserContext);
   const addHistory = async () => {
     try {
       if (userId !== "") {
@@ -26,10 +27,25 @@ const Card = ({ title, imageUrl, videoId }: any) => {
     }
   };
 
+  const addFavo = async () => {
+    try {
+      const res = await axios.post("/api/fav/addFav", {
+        userId,
+        vId: videoId,
+        title,
+        image: imageUrl,
+      });
+      console.log(res.data);
+      console.log("fav is added");
+    } catch (error: any) {
+      console.log(error.message);
+    }
+  };
+
   useEffect(() => {
-   if(id!==''){
-     setuserId(id);
-   }
+    if (id !== "") {
+      setuserId(id);
+    }
   }, [id]);
 
   return (
@@ -47,6 +63,9 @@ const Card = ({ title, imageUrl, videoId }: any) => {
             className=" rounded-2xl "
           />
           <h1 className="m-2">{title}</h1>
+          <button onClick={addFavo}>
+            <AiFillLike />
+          </button>
         </div>
       </Link>
     </>
