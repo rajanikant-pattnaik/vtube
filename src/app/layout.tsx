@@ -4,6 +4,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,12 +22,17 @@ export default function RootLayout({
   const [username, setusername] = useState("");
   const [email, setemail] = useState("");
   useEffect(() => {
-    const val = localStorage.getItem("user");
-    if (val !== null) {
-      const userval = JSON.parse(val);
-      setusername(userval.tokenData.username);
-      setid(userval.tokenData.id);
-    }
+    const getDetails = async () => {
+      try {
+        const res = await axios.get("/api/users/user");
+        setid(res.data.data._id);
+        setusername(res.data.data.username);
+        setemail(res.data.data.email);
+      } catch (error: any) {
+        console.log(error.message);
+      }
+    };
+    getDetails();
   }, []);
   return (
     <html lang="en">

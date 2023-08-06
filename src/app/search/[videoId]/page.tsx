@@ -3,6 +3,7 @@ import { fetchVideoDetail } from "@/helpers/fetchAPI";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
+import {AiFillLike} from 'react-icons/ai'
 
 const Search = ({ params }: any) => {
   const [data, setdata] = useState({
@@ -34,7 +35,9 @@ const Search = ({ params }: any) => {
               url={`https://www.youtube.com/watch?v=${params.videoId}`}
               controls={true}
             />
-
+            <div>
+              <AiFillLike/>
+            </div>
             <Link href={`/channel/${data.snippet.channelId}`}>
               {" "}
               <h1 className="block text-center">{data.snippet.channelTitle}</h1>
