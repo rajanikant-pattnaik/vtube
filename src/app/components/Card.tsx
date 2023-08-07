@@ -9,6 +9,7 @@ import { AiFillLike } from "react-icons/ai";
 
 const Card = ({ title, imageUrl, videoId }: any) => {
   const [userId, setuserId] = useState("");
+  const [isLike, setisLike] = useState(false);
   const { id } = useContext(UserContext);
   const addHistory = async () => {
     try {
@@ -19,8 +20,6 @@ const Card = ({ title, imageUrl, videoId }: any) => {
           title,
           image: imageUrl,
         });
-        console.log(res.data);
-        console.log("history will be added");
       }
     } catch (error: any) {
       console.log(error.message);
@@ -35,8 +34,6 @@ const Card = ({ title, imageUrl, videoId }: any) => {
         title,
         image: imageUrl,
       });
-      console.log(res.data);
-      console.log("fav is added");
     } catch (error: any) {
       console.log(error.message);
     }
@@ -46,7 +43,13 @@ const Card = ({ title, imageUrl, videoId }: any) => {
     if (id !== "") {
       setuserId(id);
     }
-  }, [id]);
+    const checkFav=async()=>{
+      const res=await axios.post('/api/fav/isFav',{userId:id,vId:videoId});
+      console.log(res.data.data);
+      setisLike(res.data.data);
+    }
+    checkFav();
+  }, [id,videoId]);
 
   return (
     <>
@@ -63,7 +66,7 @@ const Card = ({ title, imageUrl, videoId }: any) => {
             className=" rounded-2xl "
           />
           <h1 className="m-2">{title}</h1>
-          <button onClick={addFavo}>
+          <button onClick={addFavo} className={`${isLike?"text-blue-700":""}`}>
             <AiFillLike />
           </button>
         </div>

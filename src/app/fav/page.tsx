@@ -7,14 +7,19 @@ import React, { useContext, useEffect, useState } from "react";
 import Card from "../components/Card";
 import Navbar from "../components/Navbar";
 import { Toaster, toast } from "react-hot-toast";
+import { Oval } from "react-loader-spinner";
+
 
 const Page = () => {
   const router = useRouter();
+  const [loader, setloader] = useState(true);
   const [data, setdata] = useState([]);
   const { id } = useContext(UserContext);
   const deleteALLFav = async () => {
     if (id !== "") {
       try {
+        setdata([])
+        setloader(true);
         const res = await axios.post("/api/fav/deleteAllFav", {
           userid: id,
         });
@@ -24,6 +29,8 @@ const Page = () => {
       } catch (err: any) {
         console.log(err.message);
         toast.error(err.message);
+      }finally{
+        setloader(false);
       }
     }
   };
@@ -70,7 +77,22 @@ const Page = () => {
         </div>
       ) : (
         <div className="h-full w-full flex justify-center items-center">
-          no history is present.
+          {loader ? (
+            <Oval
+              height={80}
+              width={80}
+              color="white"
+              wrapperStyle={{}}
+              wrapperClass=""
+              visible={true}
+              ariaLabel="oval-loading"
+              secondaryColor="gray"
+              strokeWidth={1}
+              strokeWidthSecondary={3}
+            />
+          ) : (
+            "No fav is present"
+          )}
         </div>
       )}
       <Toaster />

@@ -4,7 +4,7 @@ export function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
 
   const isAuthPath = path === "/auth";
-  const isProtectedPath = path === "/history";
+  const isProtectedPath = path === "/history"||path==="/fav";
 
   const token = request.cookies.get("token")?.value || "";
 
@@ -21,6 +21,7 @@ export const config = {
   matcher: [
     "/",
     "/history",
+    "/fav",
     "/auth",
     "/channel/:channelId",
     "/search/:videoId",

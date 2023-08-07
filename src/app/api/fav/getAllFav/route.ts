@@ -7,7 +7,7 @@ export async function POST(request:NextRequest){
     try {
        const reqBody=await request.json() 
        const {userId}=reqBody;
-       const allfav=await fav.find({userId})
+       const allfav=await fav.find({userId}).sort({createdAt:'desc'})
        return NextResponse.json({
         message:"success! All fav are found",
         allfav

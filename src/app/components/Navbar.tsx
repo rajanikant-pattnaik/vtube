@@ -4,21 +4,24 @@ import { useRouter } from "next/navigation";
 import React, { useContext, useEffect, useState } from "react";
 import toast, { Toaster } from 'react-hot-toast'
 import UserContext from "@/context/UserContext";
+import axios from "axios";
 
 const Navbar = () => {
   const [item, setitem] = useState("");
   const [acc, setAcc] = useState("ACCOUNT");
   const router=useRouter();
   const {username}=useContext(UserContext);
-  const handleLogout=()=>{
-    if(acc!=='ACCOUNT'){
-      localStorage.removeItem('user');
-      toast.success('User logout successfully')
-      router.push('/auth')
+  const handleLogout=async()=>{
+   if(acc!=="ACCOUNT"){
+    try {
+      const res=await axios.get('/api/users/logout',{});
+      console.log(res);
+      router.push('/auth');
+    } catch (error:any) {
+      console.log(error.message);
     }
-    else{
-      toast.success('Login First');
-    }
+   
+   }
   }
   useEffect(() => {
     if(username!==''){
