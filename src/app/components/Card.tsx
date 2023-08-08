@@ -20,6 +20,12 @@ const Card = ({ title, imageUrl, videoId }: any) => {
           title,
           image: imageUrl,
         });
+        const res2=await axios.post("/api/wl/addWl",{
+          userId,
+          vId:videoId,
+          title,
+          image:imageUrl
+        })
       }
     } catch (error: any) {
       console.log(error.message);
