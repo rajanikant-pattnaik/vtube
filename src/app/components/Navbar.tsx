@@ -4,18 +4,25 @@ import { useRouter } from "next/navigation";
 import React, { useContext, useEffect, useState } from "react";
 import toast, { Toaster } from 'react-hot-toast'
 import UserContext from "@/context/UserContext";
+import {AiOutlineMenu} from "react-icons/ai";
 import axios from "axios";
+import Drawer from "./Drawer";
 
 const Navbar = () => {
   const [item, setitem] = useState("");
   const [acc, setAcc] = useState("ACCOUNT");
   const router=useRouter();
   const {username}=useContext(UserContext);
+  const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
+
+  const toggleDrawer = () => {
+    setIsDrawerOpen(!isDrawerOpen);
+  };
   const handleLogout=async()=>{
    if(acc!=="ACCOUNT"){
     try {
       const res=await axios.get('/api/users/logout',{});
-      console.log(res);
+      toast.success("logout successful")
       router.push('/auth');
     } catch (error:any) {
       console.log(error.message);
@@ -30,6 +37,14 @@ const Navbar = () => {
   }, [username]);
   return (
     <nav className="w-full flex sticky top-0 justify-between p-6 h-20 bg-black">
+      <div className="flex h-screen">
+      <Drawer isOpen={isDrawerOpen} onClose={toggleDrawer}/>
+      <div className="flex-1 p-4 overflow-y-auto">
+        <button onClick={toggleDrawer} className="text-gray-500">
+          <AiOutlineMenu/>
+        </button>
+      </div>
+    </div>
       <Link href={`/`} className="pointer">
         VTUBE
       </Link>
