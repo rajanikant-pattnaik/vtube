@@ -1,4 +1,5 @@
 "use client";
+import Navbar from "@/app/components/Navbar";
 import { fetchVideoDetail } from "@/helpers/fetchAPI";
 import Link from "next/link";
 import React, {  useEffect, useState } from "react";
@@ -22,6 +23,8 @@ const Search = ({ params }: any) => {
     fetchDetails();
   }, [params.videoId]);
   return (
+    <>
+    <Navbar/>
     <div>
       {data === undefined ? (
         <div>No Data</div>
@@ -41,6 +44,7 @@ const Search = ({ params }: any) => {
         </div>
       )}
     </div>
+    </>
   );
 };
 
