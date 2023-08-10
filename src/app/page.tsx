@@ -9,8 +9,8 @@ export default function Home() {
   const [feed, setfeed] = useState("Latest");
   return (
     <main>
-      <Navbar />
-      <FeedBar feed={feed} setfeed={setfeed} />
+      <Navbar/>
+      <FeedBar feed={feed} setfeed={setfeed}/>
       <Video feed={feed} />
     </main>
   );

@@ -4,7 +4,7 @@ import React from "react";
 
 const FeedBar = ({ feed, setfeed }: any) => {
   return (
-    <div className="flex justify-start top-16 overflow-x-scroll no-scrollbar py-4 bg-black z-0">
+    <div className="flex justify-start sticky top-16 overflow-x-auto no-scrollbar py-4 bg-black z-0">
       {categories.map((category) => (
         <button
           key={category}

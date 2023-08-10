@@ -7,6 +7,7 @@ import UserContext from "@/context/UserContext";
 import {AiOutlineMenu} from "react-icons/ai";
 import axios from "axios";
 import Drawer from "./Drawer";
+import FeedBar from "./FeedBar";
 
 const Navbar = () => {
   const [item, setitem] = useState("");
@@ -36,18 +37,19 @@ const Navbar = () => {
     }
   }, [username]);
   return (
-    <nav className="w-full flex sticky top-0 justify-between p-6 h-20 bg-black">
+    <nav className="w-full flex sticky top-0 justify-between p-6 h-20 bg-black z-10">
       <div className="flex h-screen">
       <Drawer isOpen={isDrawerOpen} onClose={toggleDrawer}/>
       <div className="flex-1 p-4 overflow-y-auto">
-        <button onClick={toggleDrawer} className="text-gray-500">
+        <button onClick={toggleDrawer} className="text-gray-500 cursor-pointer mb-8">
           <AiOutlineMenu/>
         </button>
       </div>
-    </div>
       <Link href={`/`} className="pointer">
         VTUBE
       </Link>
+    </div>
+      
       <div className="w-1/2 h-full border-2 border-white px-2">
         <input
           type="text"
@@ -66,6 +68,8 @@ const Navbar = () => {
       <div onClick={handleLogout}>{acc}</div>
       <Toaster/>
     </nav>
+    
+    
   );
 };
 
