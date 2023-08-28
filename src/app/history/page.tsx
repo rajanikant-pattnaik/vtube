@@ -27,6 +27,7 @@ const Page = () => {
       
      }
   }
+  
 
   useEffect(() => {
     const getHistory=async()=>{

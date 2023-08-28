@@ -1,8 +1,9 @@
+"use client"
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 export function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
-
+  // const t=localStorage.getItem('token')
   const isAuthPath = path === "/auth";
   const isProtectedPath = path === "/history"||path==="/fav";
 
