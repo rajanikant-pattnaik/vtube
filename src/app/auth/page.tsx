@@ -2,7 +2,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import toast, { Toaster } from 'react-hot-toast'
+import toast from "react-hot-toast";
 
 const Page = () => {
   const [auth, setauth] = useState("Login");
@@ -11,26 +11,26 @@ const Page = () => {
     email: "",
     password: "",
   });
-  const router=useRouter();
+  const router = useRouter();
   const handleChange = (e: any) => {
     setCred({
       ...cred,
       [e.target.name]: e.target.value,
     });
   };
-  
-  const handleAuth = async () => {
+
+  const handleAuth = async (e: any) => {
+    e.preventDefault();
     if (auth === "Login") {
       try {
-        const res=await axios.post('/api/users/login',cred);
-        localStorage.setItem('user',JSON.stringify(res.data))
-        router.push('/')
-        toast.success('User login Successfully')
-      } catch (error:any) {
+        const res = await axios.post("/api/users/login", cred);
+        localStorage.setItem("user", JSON.stringify(res.data));
+        toast.success("User login Successfully");
+        router.push("/");
+      } catch (error: any) {
         toast.error(error.message);
-        console.log(error)
+        console.log(error);
       }
-      
     }
     if (auth === "Register") {
       try {
@@ -42,8 +42,8 @@ const Page = () => {
           email: "",
           password: "",
         });
-        toast.success('user registered successfully')
-      } catch (error:any) {
+        toast.success("user registered successfully");
+      } catch (error: any) {
         toast.error(error.message);
       }
     }
@@ -64,7 +64,7 @@ const Page = () => {
           <div className="relative max-w-md mx-auto mt-4 md:mt-8">
             <div className="overflow-hidden bg-black rounded-md shadow-md">
               <div className="px-4 py-6 sm:px-8 sm:py-7">
-                <form method="POST">
+                <form>
                   <div className="space-y-5">
                     <div className={`${auth === "Login" ? "hidden" : ""}`}>
                       <label
@@ -211,7 +211,8 @@ const Page = () => {
                         }`}{" "}
                         <button
                           title=""
-                          onClick={() => {
+                          onClick={(e: any) => {
+                            e.preventDefault();
                             setauth(
                               `${auth === "Login" ? "Register" : "Login"}`
                             );
@@ -224,7 +225,6 @@ const Page = () => {
                               : "Login into your account"
                           }`}
                         </button>
-                        <Toaster/>
                       </p>
                     </div>
                   </div>
